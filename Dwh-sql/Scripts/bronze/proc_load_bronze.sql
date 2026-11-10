@@ -24,6 +24,9 @@ AS
 BEGIN
     DECLARE @start_time AS DATETIME, @end_time AS DATETIME, @batch_start_time AS DATETIME, @batch_end_time AS DATETIME;
     BEGIN TRY
+        PRINT ('================================================');
+        PRINT ('Loading CRM Tables');
+        PRINT ('================================================');
         SET @start_time = GETDATE();
         TRUNCATE TABLE bronze.crm_cust_info;
         BULK INSERT bronze.crm_cust_info FROM 'C:\Users\sekal\Documents\Amahoro\AWS_dWH_Practice\sql-data-warehouse-project\01_datasets\source_crm\cust_info.csv'
@@ -47,7 +50,11 @@ BEGIN
         SET @end_time = GETDATE();
         PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
         PRINT '>> -------------';
+        
 
+        PRINT ('================================================');
+        PRINT ('Loading ERP Tables');
+        PRINT ('================================================');
         SET @start_time = GETDATE();
         TRUNCATE TABLE bronze.erp_loc_a101;
         BULK INSERT bronze.erp_loc_a101 FROM 'C:\Users\sekal\Documents\Amahoro\AWS_dWH_Practice\sql-data-warehouse-project\01_datasets\source_erp\LOC_A101.csv'
