@@ -34,7 +34,7 @@ SELECT DISTINCT cst_gndr FROM silver.crm_cust_info;
 
 
 
--- #crm_prd_info__scripts
+-- crm_prd_info__scripts
 
 -- Check For NUlls or Dplicates in primar Key
 -- Expectation: No Result
