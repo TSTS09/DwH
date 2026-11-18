@@ -89,7 +89,7 @@ CREATE OR ALTER PROCEDURE silver.load_silver AS
 
         PRINT '>> -------------';
 
-        -- crm-prd-info__scripts
+        ---------------- crm-prd-info__scripts
         set @start_time = GETDATE();
         IF OBJECT_ID ('silver.crm_prd_info', 'U') IS NOT NULL
         DROP TABLE silver.crm_prd_info;
@@ -143,7 +143,7 @@ CREATE OR ALTER PROCEDURE silver.load_silver AS
                         prd_key
                     ORDER BY prd_start_dt
                 ) - 1 AS DATE
-            ) AS prd_end_dt  -- Calculate end date as one day before the next start date
+            ) AS prd_end_dt  -- Calculate end date as one day before the next start date(Data enrichment)
         FROM bronze.crm_prd_info
         WHERE
             SUBSTRING(prd_key, 7, LEN (prd_key)) NOT IN(
