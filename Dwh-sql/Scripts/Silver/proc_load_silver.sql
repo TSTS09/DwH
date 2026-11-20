@@ -44,7 +44,7 @@ CREATE OR ALTER PROCEDURE silver.load_silver AS
                 cst_key,
                 cst_firstname,
                 cst_lastname,
-                cst_material_status,
+                cst_marital_status,
                 cst_gndr,
                 cst_create_date
             )
@@ -145,11 +145,12 @@ CREATE OR ALTER PROCEDURE silver.load_silver AS
                 ) - 1 AS DATE
             ) AS prd_end_dt  -- Calculate end date as one day before the next start date(Data enrichment)
         FROM bronze.crm_prd_info
-        WHERE
-            SUBSTRING(prd_key, 7, LEN (prd_key)) NOT IN(
-                SELECT sls_prd_key
-                FROM bronze.crm_sales_details
-            );
+        -- WHERE
+        --     SUBSTRING(prd_key, 7, LEN (prd_key)) NOT IN(
+        --         SELECT sls_prd_key
+        --         FROM bronze.crm_sales_details
+        --     );
         SET @end_time = GETDATE();
         PRINT '>> Load Duration: ' + CAST(DATEDIFF(SECOND, @start_time, @end_time) AS NVARCHAR) + ' seconds';
         PRINT '>> -------------';
+    
